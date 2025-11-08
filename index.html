@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Translator App</title>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px 40px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 2px solid #9face6;
+    font-size: 16px;
+    outline: none;
+  }
+
+  input:focus, select:focus {
+    border-color: #74ebd5;
+  }
+
+  button {
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+
+  .result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    background: #f1f7ff;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🌎 Word Translator</h2>
+  
+  <input type="text" id="wordInput" placeholder="Enter English word...">
+  
+  <select id="languageSelect">
+    <option value="hindi">Hindi</option>
+    <option value="spanish">Spanish</option>
+    <option value="french">French</option>
+  </select>
+
+  <button onclick="translateWord()">Translate</button>
+
+  <div id="result" class="result"></div>
+</div>
+
+<script>
+  // Small inbuilt dictionary
+  const dictionary = {
+    hello: { hindi: "नमस्ते", spanish: "Hola", french: "Bonjour" },
+    thankyou: { hindi: "धन्यवाद", spanish: "Gracias", french: "Merci" },
+    water: { hindi: "पानी", spanish: "Agua", french: "Eau" },
+    food: { hindi: "भोजन", spanish: "Comida", french: "Nourriture" },
+    friend: { hindi: "दोस्त", spanish: "Amigo", french: "Ami" },
+    love: { hindi: "प्यार", spanish: "Amor", french: "Amour" },
+    cat: { hindi: "बिल्ली", spanish: "Gato", french: "Chat" },
+    dog: { hindi: "कुत्ता", spanish: "Perro", french: "Chien" }
+  };
+
+  function translateWord() {
+    const word = document.getElementById("wordInput").value.toLowerCase().trim();
+    const lang = document.getElementById("languageSelect").value;
+    const resultBox = document.getElementById("result");
+
+    if (word === "") {
+      resultBox.innerHTML = "⚠️ Please enter a word.";
+      return;
+    }
+
+    if (dictionary[word]) {
+      resultBox.innerHTML = `Translation (${lang.toUpperCase()}): <b>${dictionary[word][lang]}</b>`;
+    } else {
+      resultBox.innerHTML = "❌ Word not found in dictionary.";
+    }
+  }
+</script>
+
+</body>
+</html>
